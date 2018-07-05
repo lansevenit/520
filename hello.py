@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/sbin/python3
 print('Olá Mundo!')
 mensagem = 'hello world'
 nome = input("digite seu nome:")
