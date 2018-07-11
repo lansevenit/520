@@ -8,7 +8,6 @@ else
     print("Voce Errou!")            
 
 
-
     print('daniel','prata', sep='.', end='\n\n')
 
     letras= []

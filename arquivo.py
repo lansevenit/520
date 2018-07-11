@@ -32,6 +32,6 @@ exit()
 # abrindo um arquivo com 'a' para poder escrever.
 
 with open('novo.txt', 'a') as arquivo:
-    for liha in alterado:
+    for linha in alterado:
         arquivo.wite(linha)
 

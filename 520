@@ -1,0 +1,174 @@
+postgres@developer:~$ psql
+psql (9.6.7)
+Digite "help" para ajuda.
+
+postgres=# \q
+postgres@developer:~$ psql
+psql (9.6.7)
+Digite "help" para ajuda.
+
+postgres=# \dt
+Nenhuma relação foi encontrada.
+postgres=# \du
+                                    Lista de roles
+ Nome da role |                         Atributos                         | Membro de 
+--------------+-----------------------------------------------------------+-----------
+ postgres     | Super-usuário, Cria role, Cria BD, Replicação, Ignora RLS | {}
+
+postgres=# create user admin password '4linux'
+postgres-# \dt
+Nenhuma relação foi encontrada.
+postgres-# \du
+                                    Lista de roles
+ Nome da role |                         Atributos                         | Membro de 
+--------------+-----------------------------------------------------------+-----------
+ postgres     | Super-usuário, Cria role, Cria BD, Replicação, Ignora RLS | {}
+
+postgres-# create database projeto owner admin;
+ERRO:  erro de sintaxe em ou próximo a "create"
+LINHA 2: create database projeto owner admin;
+         ^
+postgres=# \du
+                                    Lista de roles
+ Nome da role |                         Atributos                         | Membro de 
+--------------+-----------------------------------------------------------+-----------
+ postgres     | Super-usuário, Cria role, Cria BD, Replicação, Ignora RLS | {}
+
+postgres=# create user admin password '4linux';
+CREATE ROLE
+postgres=# \du
+                                    Lista de roles
+ Nome da role |                         Atributos                         | Membro de 
+--------------+-----------------------------------------------------------+-----------
+ admin        |                                                           | {}
+ postgres     | Super-usuário, Cria role, Cria BD, Replicação, Ignora RLS | {}
+
+postgres=# create database projeto owner admin;
+CREATE DATABASE
+postgres=# \q
+postgres@developer:~$ psql -h localhost -U admin projeto
+Senha para usuário admin: 
+psql (9.6.7)
+conexão SSL (protocolo: TLSv1.2, cifra: ECDHE-RSA-AES256-GCM-SHA384, bits: 256, compressão: desabilitado)
+Digite "help" para ajuda.
+
+projeto=> \dt
+Nenhuma relação foi encontrada.
+projeto=> 
+projeto=> crete table pessoas(id serial, nome varchar(50), idade smalint, telefone varchar(12))
+projeto-> );
+ERRO:  erro de sintaxe em ou próximo a "crete"
+LINHA 1: crete table pessoas(id serial, nome varchar(50), idade smali...
+         ^
+projeto=> 
+projeto=> crete table pessoas(id serial, nome varchar(50), idade smalint, telefone varchar(12) 
+);
+ERRO:  erro de sintaxe em ou próximo a "crete"
+LINHA 1: crete table pessoas(id serial, nome varchar(50), idade smali...
+         ^
+projeto=> crete table pessoas(id serial, nome varchar(50), idade smallint, telefone varchar(12)
+);
+ERRO:  erro de sintaxe em ou próximo a "crete"
+LINHA 1: crete table pessoas(id serial, nome varchar(50), idade small...
+         ^
+projeto=> crete table pessoas(id serial, nome varchar(50), idade smallint, telefone varchar(12)
+);
+ERRO:  erro de sintaxe em ou próximo a "crete"
+LINHA 1: crete table pessoas(id serial, nome varchar(50), idade small...
+         ^
+projeto=> create table pessoas(id serial, nome varchar(50), idade smallint, telefone varchar(12)
+);
+CREATE TABLE
+projeto=> \dt
+         Lista de relações
+ Esquema |  Nome   |  Tipo  | Dono  
+---------+---------+--------+-------
+ public  | pessoas | tabela | admin
+(1 registro)
+
+projeto=> \d pessoas
+                                     Tabela "public.pessoas"
+  Coluna  |         Tipo          |                        Modificadores                         
+----------+-----------------------+--------------------------------------------------------------
+ id       | integer               | não nulo valor padrão de nextval('pessoas_id_seq'::regclass)
+ nome     | character varying(50) | 
+ idade    | smallint              | 
+ telefone | character varying(12) | 
+
+projeto=> insert table pessoas(email varchar(50) not null
+);
+ERRO:  erro de sintaxe em ou próximo a "table"
+LINHA 1: insert table pessoas(email varchar(50) not null
+                ^
+projeto=> insert table pessoas(email varchar(50)          
+);
+ERRO:  erro de sintaxe em ou próximo a "table"
+LINHA 1: insert table pessoas(email varchar(50)
+                ^
+projeto=> \d pessoas
+                                     Tabela "public.pessoas"
+  Coluna  |         Tipo          |                        Modificadores                         
+----------+-----------------------+--------------------------------------------------------------
+ id       | integer               | não nulo valor padrão de nextval('pessoas_id_seq'::regclass)
+ nome     | character varying(50) | 
+ idade    | smallint              | 
+ telefone | character varying(12) | 
+
+projeto=> 
+projeto=> alter  table pessoas(id serial, nome varchar(50), idade smallint, telefone varchar(12), email varchar (50) not null
+);
+ERRO:  erro de sintaxe em ou próximo a "("
+LINHA 1: alter  table pessoas(id serial, nome varchar(50), idade smal...
+                             ^
+projeto=> update table pessoas(id serial, nome varchar(50), idade smallint, telefone varchar(12), email varchar (50) not null
+);
+ERRO:  erro de sintaxe em ou próximo a "table"
+LINHA 1: update table pessoas(id serial, nome varchar(50), idade smal...
+                ^
+projeto=> \d pessoas
+                                     Tabela "public.pessoas"
+  Coluna  |         Tipo          |                        Modificadores                         
+----------+-----------------------+--------------------------------------------------------------
+ id       | integer               | não nulo valor padrão de nextval('pessoas_id_seq'::regclass)
+ nome     | character varying(50) | 
+ idade    | smallint              | 
+ telefone | character varying(12) | 
+
+projeto=> \d pessoas
+                                     Tabela "public.pessoas"
+  Coluna  |         Tipo          |                        Modificadores                         
+----------+-----------------------+--------------------------------------------------------------
+ id       | integer               | não nulo valor padrão de nextval('pessoas_id_seq'::regclass)
+ nome     | character varying(50) | 
+ idade    | smallint              | 
+ telefone | character varying(12) | 
+
+projeto=> insert into table pessoas(email varchar(50) not null
+);
+ERRO:  erro de sintaxe em ou próximo a "table"
+LINHA 1: insert into table pessoas(email varchar(50) not null
+                     ^
+projeto=> insert into pessoas(email varchar(50) not null
+);
+ERRO:  erro de sintaxe em ou próximo a "varchar"
+LINHA 1: insert into pessoas(email varchar(50) not null
+                                   ^
+projeto=> \d
+              Lista de relações
+ Esquema |      Nome      |   Tipo    | Dono  
+---------+----------------+-----------+-------
+ public  | pessoas        | tabela    | admin
+ public  | pessoas_id_seq | sequência | admin
+(2 registros)
+
+projeto=> \d pessoas
+                                     Tabela "public.pessoas"
+  Coluna  |         Tipo          |                        Modificadores                         
+----------+-----------------------+--------------------------------------------------------------
+ id       | integer               | não nulo valor padrão de nextval('pessoas_id_seq'::regclass)
+ nome     | character varying(50) | 
+ idade    | smallint              | 
+ telefone | character varying(12) | 
+
+projeto=> 
+

@@ -1,0 +1,6 @@
+# apt-get install postgressql
+# apt-get install contrib
+# su postgres (para entrar no  postgres 
+
+# psql = Entra no modo de configuração do banco sql
+
